@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/probinson2015/azure_explorer/issues"
   },
-  "homepage": "https://github.com/probinson2015/azure_explorer#readme"
+  "homepage": "https://github.com/probinson2015/azure_explorer#readme",
+  "dependencies": {
+    "ejs": "^2.4.2",
+    "express": "^4.14.0"
+  }
 }
