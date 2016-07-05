@@ -6,11 +6,12 @@ var app = express();
 app.set('view engine', 'ejs');
 
 app.get('/viewer', function(req, res, next) {
-  res.render('viewer');
+
   //res.send(200, 'OK');
   fs.readdir('/', function(err,data){
     if (err) throw err;
     console.log(data);
+    res.render('viewer', {data:data});
   })
 });
 
