@@ -1,0 +1,19 @@
+{
+  "name": "azure_explorer",
+  "version": "1.0.0",
+  "description": "App that provides File Explorer for Linux file system.",
+  "main": "azure_explorer_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/probinson2015/azure_explorer.git"
+  },
+  "author": "Corrina, Porsha, Alyssa, Yueyue, Amy, Laura",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/probinson2015/azure_explorer/issues"
+  },
+  "homepage": "https://github.com/probinson2015/azure_explorer#readme"
+}
