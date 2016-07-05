@@ -15,26 +15,27 @@ app.get('/viewer', function(req, res, next) {
     };
     if (err) throw err;
     // console.log(data);
-    data.forEach(function(item) {
-      fs.stat('/'+ item, function(err, stats){
-        if(err) {
-          console.log(err);
-          return;
-        }
-        if (stats.isFile()) {
-          // console.log("is File")
-          console.log(item)
-          allItems['files'].push(item)
-        }
-        if(stats.isDirectory()){
-          // console.log("is Directory")
-          console.log(item)
-          allItems['folders'].push(item)
-        }
-      })
-    })
+    for (var i = 0; i <= data.length; i++) {
+      console.log(fs.lstatSync(data[i]).isDirectory());
+      // fs.statSync('/'+ data[i], function(err, stats, next){
+      //   console.log(stats)
+      //   if(err) {
+      //     next;
+      //   }
+      //   if (stats.isFile()) {
+      //     // console.log("is File")
+      //     console.log(data[i])
+      //     allItems['files'].push(data[i])
+      //   }
+      //   if(stats.isDirectory()){
+      //     // console.log("is Directory")
+      //     console.log(data[i])
+      //     allItems['folders'].push(data[i])
+      //   }
+      // })
+    }
     console.log("Folders: " + allItems.folders);
-    console.log("Files: " + allItems.files);
+    console.log("Files: " + allItems.files)
 
     res.render('viewer', {data:data});
   })
