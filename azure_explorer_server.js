@@ -7,38 +7,33 @@ app.set('view engine', 'ejs');
 
 app.get('/viewer', function(req, res, next) {
 
-  //res.send(200, 'OK');
   fs.readdir('/', function(err,data){
-    var allItems = {
-      files: [12000],
-      folders: [124944]
+    if (err) return console.log(err);
+
+    var directories = {
+      folders: [],
+      files: []
     };
-    if (err) throw err;
-    // console.log(data);
-    for (var i = 0; i <= data.length; i++) {
-      console.log(fs.lstatSync(data[i]).isDirectory());
-      // fs.statSync('/'+ data[i], function(err, stats, next){
-      //   console.log(stats)
-      //   if(err) {
-      //     next;
-      //   }
-      //   if (stats.isFile()) {
-      //     // console.log("is File")
-      //     console.log(data[i])
-      //     allItems['files'].push(data[i])
-      //   }
-      //   if(stats.isDirectory()){
-      //     // console.log("is Directory")
-      //     console.log(data[i])
-      //     allItems['folders'].push(data[i])
-      //   }
-      // })
-    }
-    console.log("Folders: " + allItems.folders);
-    console.log("Files: " + allItems.files)
+
+    data.forEach(function(item) {
+      console.log('item:' + item);
+
+      try {
+          var stats = fs.statSync('/' + item);
+          if (stats.isFile()) {
+            directories.files.push(item);
+          }
+          if (stats.isDirectory()) {
+            directories.folders.push(item);
+          }
+          console.log('it exists');
+      } catch(err) {
+            console.log('it does not exist');
+      }
+    });
 
     res.render('viewer', {data:data});
-  })
+  });
 });
 
 var server = app.listen(80);
