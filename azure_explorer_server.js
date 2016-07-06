@@ -5,6 +5,8 @@ var app = express();
 
 app.set('view engine', 'ejs');
 
+app.use(express.static(__dirname + '/public'))
+
 app.get('/viewer', function(req, res, next) {
 
   fs.readdir('/', function(err,data){
@@ -16,7 +18,7 @@ app.get('/viewer', function(req, res, next) {
     };
 
     data.forEach(function(item) {
-      console.log('item:' + item);
+      // console.log('item:' + item);
 
       try {
           var stats = fs.statSync('/' + item);
@@ -26,13 +28,14 @@ app.get('/viewer', function(req, res, next) {
           if (stats.isDirectory()) {
             directories.folders.push(item);
           }
-          console.log('it exists');
+          // console.log('it exists');
       } catch(err) {
             console.log('it does not exist');
       }
     });
-
-    res.render('viewer', {data:data});
+    console.log("Folders: " + directories.folders);
+    console.log("Files: " + directories.files);
+    res.render('viewer', {directories: directories.folders, files: directories.files});
   });
 });
 

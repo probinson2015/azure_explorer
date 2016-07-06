@@ -1,26 +1,38 @@
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/test.js"></script>
 
 
-
-<head></head>
+</head>
 <body>
   <div id="file-viewer-container">
-    <%=data%>
-  </div>
-  <script type="text/javascript">
-      // allFiles is an array containing data for each file, presumably an object of objects like:
-      // allFiles { { name: file1, size: 134 }, { name: file2, size: 156 } }
-      function listAllFiles(fromFile) {
-        if(fromFile) {
-            for(var i = 0; i < allFiles.length; i++) {
-                $.each(allFiles[i], function(key, value) {
-                    $('.file-divs').append('<svg info here><br>' + allFiles[i].name);
-                })
-            }
-        }
-      }
-  </script>
+    <% for (var i = 0; i < directories.length; i++){%>
+        <div class="directory">
+            <div>
+                <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i>
+            </div>
+            <div>
+                <%=directories[i]%>
+            </div>
+        </div>
+    <% }%>
+
+    <% for (var i = 0; i < files.length; i++){%>
+        <div class="file">
+            <div>
+                <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
+            </div>
+            <div>
+                <%=files[i]%>
+            </div>
+        </div>
+    <% }%>
+</div>
 </body>
 
 </html>
