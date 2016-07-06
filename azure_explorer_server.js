@@ -9,25 +9,32 @@ app.get('/viewer', function(req, res, next) {
 
   //res.send(200, 'OK');
   fs.readdir('/', function(err,data){
-    if (err) throw err;
-    console.log(data);
-    data.forEach(function(item) {
-      fs.stat('/'+ item, function(err, stats){
-        if(err) {
-          console.log(err);
-          return;
-        }
-        if (stats.isFile()) {
-          console.log("is File")
-        }
-        if(stats.isDirectory()){
-          console.log("is Directory")
-        }
-      })
-    })
+    if (err) return console.log(err);
+    var directories = {
+      folders: [],
+      files: []
+    };
 
+    data.forEach(function(item) {
+      console.log('item:' + item);
+
+      try {
+          var stats = fs.statSync('/' + item);
+          if (stats.isFile()) {
+            directories.files.push(item);
+          }
+          if (stats.isDirectory()) {
+            directories.folders.push(item);
+          }
+          console.log('it exists');
+      } catch(err) {
+            console.log('it does not exist');
+      }
+    });
+    console.log(directories.folders);
+    console.log(directories.files);
     res.render('viewer', {data:data});
-  })
+  });
 });
 
 var server = app.listen(80);
